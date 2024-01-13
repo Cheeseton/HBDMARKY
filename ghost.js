@@ -281,7 +281,7 @@ class Ghost {
         canvasContext.arc(
             this.x + oneBlockSize / 2,
             this.y + oneBlockSize / 2,
-            this.range * oneBlockSize * 9,
+            this.range * oneBlockSize * 20,
             0,
             2 * Math.PI
         );
