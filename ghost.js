@@ -48,14 +48,26 @@ class Ghost {
     }
 
     moveProcess() {
-        if (this.isInRange()) {
-            this.target = pacman;
-        } else {
-            this.target = randomTargetsForGhosts[this.randomTargetIndex];
+        this.target = pacman;
+    
+        // Calculate direction based on Pacman's position
+        this.direction = this.calculateNewDirection(
+            map,
+            parseInt(this.target.x / oneBlockSize),
+            parseInt(this.target.y / oneBlockSize)
+        );
+    
+        if (typeof this.direction == "undefined") {
+            // If direction is undefined, keep the current direction
+            return;
         }
-        this.changeDirectionIfPossible();
+    
+        // Handle additional logic if needed
+    
         this.moveForwards();
+    
         if (this.checkCollisions()) {
+            // If collisions occur, move backwards
             this.moveBackwards();
             return;
         }
@@ -269,7 +281,7 @@ class Ghost {
         canvasContext.arc(
             this.x + oneBlockSize / 2,
             this.y + oneBlockSize / 2,
-            this.range * oneBlockSize,
+            this.range * oneBlockSize * 9,
             0,
             2 * Math.PI
         );
